@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+
+    <style media="screen">
+
+
+        section{
+            position: relative;
+        }
+		
+		body{
+			background: rgba(112,128,144,1);
+		}
+
+        .environement{
+            width: 900px;
+            height: 900px;
+            margin: auto;
+            margin-top: 20px;
+			background: rgba(250,250,210,1);
+			border-radius: 100px;
+        }
+		
+
+        .state {
+            width: 298px;
+            height: 298px;
+            border: 1px solid #e0e0e0;
+            float: left;
+            position: relative;
+			border-radius: 100px;
+			background: rgba(250,250,250,1);
+        }
+
+        .state h1{
+            position: absolute;
+            top: 115px;
+            margin: 0px;
+            font-size: 50px;
+            left: 110px;
+        }
+		
+
+        .left, .right, .up, .down {
+            position: absolute;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .left {
+            top: 110px;
+            left: 10px;
+        }
+
+        .right {
+            top: 110px;
+            right: 10px;
+        }
+
+        .up {
+            top: 10px;
+            right: 130px;
+        }
+
+        .down {
+            bottom: 10px;
+            right: 130px;
+        }
+
+		#one {
+            background: rgba(0,0,255,0.5);
+        }
+
+        #height {
+            background: rgba(255,0,0,0.5);
+        }
+		
+		#three {
+            background: rgba(255,0,0,0.5);
+        }
+
+        #nine {
+            background: rgba(0,255,0,0.5);
+        }
+
+        .agent {
+            position: absolute;
+            width: 86px;
+            height: 81px;
+            background: rgba(0,255,255,0.5);
+            z-index: 80;
+			border-radius: 100px;
+        }
+
+        button{
+            background: #4e4e4e;
+            border: none;
+            width: 100px;
+            height: 52px;
+            color: white;
+            font-weight: bold;
+            display: block;
+            margin: auto;
+            cursor: pointer;
+			border-radius: 100px;
+        }
+
+    </style>
+    <body>
+	
+		
+
+		<center><table>
+		  <tr>
+			<td><button id="bStep" type="button">Step</button><center></center></td>
+			<td>  </td>
+			<td><button id="bUp" type="button">Up</button><center></center></td>
+			<td> </td>
+		  </tr>
+		  <tr>
+			<td><button id="bOne" type="button">1 Game</button><center></center></td>
+			<td><button id="bL" type="button">Left</button><center></center></td>
+			<td><button id="bD" type="button">Down</button><center></center></td>
+			<td><button id="bR" type="button">Right</button><center></center></td>
+		  </tr>
+		  <tr>
+			<td><button id="bTen" type="button">10 Games</button><center></center></td>
+			<td> </td>
+			<td><button id="eps" type="button"></button></td>
+			<td><button id="lr" type="button"></button></td>
+		  </tr>
+		</table></center>
+
+
+
+        
+		
+		
+
+        <section class="environement">
+
+            <div class="agent" id="agent">
+            </div>
+
+            <div class="state" id="one">
+                <h1><span id="V_1">0</span></h1>
+                <span class="left">
+                    <span id="1_0">0</span>
+                    <br>
+                    &#8592;
+                </span>
+
+                <span class="right">
+                    <span id="1_1">0</span>
+                    <br>
+                    &#8594;
+                </span>
+
+                <span class="up">
+                    <span id="1_2">0</span>
+                    <br>
+                    &#8593;
+                </span>
+
+                <span class="down">
+                    <span id="1_3">0</span>
+                    <br>
+                    &#8595;
+                </span>
+            </div>
+
+            <div class="state" id="2">
+                <h1><span id="V_2">0</span></h1>
+                <span class="left">
+                    <span id="2_0">0</span>
+                    <br>
+                    &#8592;
+                </span>
+
+                <span class="right">
+                    <span id="2_1">0</span>
+                    <br>
+                    &#8594;
+                </span>
+
+                <span class="up">
+                    <span id="2_2">0</span>
+                    <br>
+                    &#8593;
+                </span>
+
+                <span class="down">
+                    <span id="2_3">0</span>
+                    <br>
+                    &#8595;
+                </span>
+            </div>
+            <div class="state" id="three">
+                <h1><span id="V_3"></span></h1>
+
+            </div>
+            <div class="state" id="four">
+                <h1><span id="V_4">0</span></h1>
+                <span class="left">
+                    <span id="4_0">0</span>
+                    <br>
+                    &#8592;
+                </span>
+
+                <span class="right">
+                    <span id="4_1">0</span>
+                    <br>
+                    &#8594;
+                </span>
+
+                <span class="up">
+                    <span id="4_2">0</span>
+                    <br>
+                    &#8593;
+                </span>
+
+                <span class="down">
+                    <span id="4_3">0</span>
+                    <br>
+                    &#8595;
+                </span>
+            </div>
+            <div class="state" id="five">
+                <h1><span id="V_5">0</span></h1>
+                <span class="left">
+                    <span id="5_0">0</span>
+                    <br>
+                    &#8592;
+                </span>
+
+                <span class="right">
+                    <span id="5_1">0</span>
+                    <br>
+                    &#8594;
+                </span>
+
+                <span class="up">
+                    <span id="5_2">0</span>
+                    <br>
+                    &#8593;
+                </span>
+
+                <span class="down">
+                    <span id="5_3">0</span>
+                    <br>
+                    &#8595;
+                </span>
+            </div>
+            <div class="state" id="six">
+                <h1><span id="V_6">0</span></h1>
+                <span class="left">
+                    <span id="6_0">0</span>
+                    <br>
+                    &#8592;
+                </span>
+
+                <span class="right">
+                    <span id="6_1">0</span>
+                    <br>
+                    &#8594;
+                </span>
+
+                <span class="up">
+                    <span id="6_2">0</span>
+                    <br>
+                    &#8593;
+                </span>
+
+                <span class="down">
+                    <span id="6_3">0</span>
+                    <br>
+                    &#8595;
+                </span>
+            </div>
+            <div class="state" id="seven">
+                <h1><span id="V_7">0</span></h1>
+                <span class="left">
+                    <span id="7_0">0</span>
+                    <br>
+                    &#8592;
+                </span>
+
+                <span class="right">
+                    <span id="7_1">0</span>
+                    <br>
+                    &#8594;
+                </span>
+
+                <span class="up">
+                    <span id="7_2">0</span>
+                    <br>
+                    &#8593;
+                </span>
+
+                <span class="down">
+                    <span id="7_3">0</span>
+                    <br>
+                    &#8595;
+                </span>
+            </div>
+            <div class="state" id="height">
+                <h1><span id="V_8"></span></h1>
+
+            </div>
+            <div class="state" id="nine">
+                <h1><span id="V_9"></span></h1>
+            </div>
+        </section>
+
+        <script type="application/javascript">
+		
+
+        var agent = document.getElementById("agent");
+        var agent_pos = {y: 0, x: 0};
+        var environement = [
+                [0, 0, -1],
+                [0, 0, 0],
+                [0, -1, 1]
+        ];
+
+        agent.style.top = "103px";
+        agent.style.left = "98px";
+
+        var state = agent_pos.y*3+agent_pos.x+1;
+
+        var Q = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ];
+		
+		var V = [0,0, 0, 0, 0, 0, 0, 0, 0, 0];
+		var transitions = [];
+		
+		var gamma = 0.9;
+        var lr = 0.5;
+		var eps = 1;
+		var decay = 0.95;
+		var epsMin = 0.01
+		
+		document.getElementById("lr").innerHTML = "Lerning rate : "+Math.round(lr * 100) / 100;
+		document.getElementById("eps").innerHTML = "Epsillon : "+Math.round(eps * 100) / 100;
+
+        function step(action){
+            if (action == 0){ // left
+                agent_pos.x = Math.min(2, Math.max(0, agent_pos.x - 1));
+            }
+            else if (action == 1){ // right
+                agent_pos.x = Math.min(2, Math.max(0, agent_pos.x + 1));
+            }
+            else if (action == 2){ // up
+                agent_pos.y = Math.min(2, Math.max(0, agent_pos.y - 1));
+            }
+            else if (action == 3){ // dpwn
+                agent_pos.y = Math.min(2, Math.max(0, agent_pos.y + 1));
+            }
+
+            agent.style.top = (agent_pos.y*298)+103 + "px";
+            agent.style.left = (agent_pos.x*298)+98 + "px";
+
+            var r = environement[agent_pos.y][agent_pos.x];
+			
+			var state1 = agent_pos.y*3+agent_pos.x+1;
+			
+			transitions.push([state, r, state1])
+			
+			state = state1;
+            return {r, stp1: state};
+        }
+		
+		
+		function reset(lr, gamma){
+		
+			while( transitions.length > 0){
+				let tmp = transitions.pop();
+				let s = tmp[0];
+				let r = tmp[1];
+				let s1 = tmp[2];
+				V[s] = V[s] + lr*(r + gamma*V[s1] - V[s]);
+				document.getElementById("V_"+s).innerHTML = Math.round(V[s] * 100) / 100;
+			}
+			agent_pos = {y: 0, x: 0};
+			agent.style.top = (agent_pos.y*298)+103 + "px";
+            agent.style.left = (agent_pos.x*298)+98 + "px";
+			state = agent_pos.y*3+agent_pos.x+1;
+			
+			eps = eps * decay
+			eps = Math.max(eps, epsMin)
+			document.getElementById("eps").innerHTML = "Epsillon : "+Math.round(eps * 100) / 100;
+		}
+		
+		
+
+        function getRandomInt(max) {
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        function argMax(array) {
+          return array.map((x, i) => [x, i]).reduce((r, a) => (a[0] > r[0] ? a : r))[1];
+        }
+
+        function take_action(st, eps){
+            if (Math.random() < eps){
+                action = getRandomInt(4);
+            }
+            else{
+                action = argMax(Q[st])
+            }
+            return action;
+        }
+		
+		function clickAction(ac){
+			let finish = false;
+            var st = state;
+			if (ac < 0) {
+				var at = take_action(st, eps);
+			}
+			else{
+				at = ac;
+			}
+			
+			
+            var {r, stp1} = step(at);
+			
+
+            var atp1 = take_action(stp1, 0.0);
+			
+            Q[st][at] = Q[st][at] + lr*(r + gamma*Q[stp1][atp1] - Q[st][at]);
+			
+			if(r != 0){
+				reset(lr, gamma);
+				finish = true;
+			}
+			
+			
+            document.getElementById(st+"_"+at).innerHTML = Math.round(Q[st][at] * 1000) / 1000;
+			
+			
+
+            if (Q[st][at] == 0){
+                document.getElementById(st+"_"+at).style.color = "#000000";
+            }
+            else if (Q[st][at] < 0){
+                document.getElementById(st+"_"+at).style.color = "#ff6060";
+            }
+            else {
+                document.getElementById(st+"_"+at).style.color = "#92b77c";
+            }
+			
+			
+			return finish;
+			
+		}
+		var bStep = document.getElementById("bStep");
+        bStep.addEventListener("click", () => {
+            clickAction(-1);
+
+        });
+		
+		var bOne = document.getElementById("bOne");
+		bOne.addEventListener("click", () => {
+		let finish = false;
+		while (!finish){
+			finish = clickAction(-1);
+		}
+			
+
+        });
+		
+		var bTen = document.getElementById("bTen");
+		bTen.addEventListener("click", () => {
+			let finish = false;
+			for (let i = 0; i < 9; i++) {
+				while (!finish){
+					finish = clickAction(-1);
+				}
+			}
+
+        });
+		
+		var bUp = document.getElementById("bUp");
+		bUp.addEventListener("click", () => {
+            clickAction(2);
+
+        });
+		
+		var bL = document.getElementById("bL");
+		bL.addEventListener("click", () => {
+			clickAction(0);
+
+        });
+		
+		var bD = document.getElementById("bD");
+		bD.addEventListener("click", () => {
+			clickAction(3);
+
+        });
+		
+		var bR = document.getElementById("bR");
+		bR.addEventListener("click", () => {
+			clickAction(1);
+        });
+		
+		
+        </script>
+    </body>
+</html>
