@@ -148,11 +148,6 @@
 
             <div class="state" id="one">
                 <h1><span id="V_1">0</span></h1>
-                <span class="left">
-                    <span id="1_0">0</span>
-                    <br>
-                    &#8592;
-                </span>
 
                 <span class="right">
                     <span id="1_1">0</span>
@@ -160,11 +155,6 @@
                     &#8594;
                 </span>
 
-                <span class="up">
-                    <span id="1_2">0</span>
-                    <br>
-                    &#8593;
-                </span>
 
                 <span class="down">
                     <span id="1_3">0</span>
@@ -187,11 +177,6 @@
                     &#8594;
                 </span>
 
-                <span class="up">
-                    <span id="2_2">0</span>
-                    <br>
-                    &#8593;
-                </span>
 
                 <span class="down">
                     <span id="2_3">0</span>
@@ -205,11 +190,6 @@
             </div>
             <div class="state" id="four">
                 <h1><span id="V_4">0</span></h1>
-                <span class="left">
-                    <span id="4_0">0</span>
-                    <br>
-                    &#8592;
-                </span>
 
                 <span class="right">
                     <span id="4_1">0</span>
@@ -263,11 +243,6 @@
                     &#8592;
                 </span>
 
-                <span class="right">
-                    <span id="6_1">0</span>
-                    <br>
-                    &#8594;
-                </span>
 
                 <span class="up">
                     <span id="6_2">0</span>
@@ -283,11 +258,6 @@
             </div>
             <div class="state" id="seven">
                 <h1><span id="V_7">0</span></h1>
-                <span class="left">
-                    <span id="7_0">0</span>
-                    <br>
-                    &#8592;
-                </span>
 
                 <span class="right">
                     <span id="7_1">0</span>
@@ -301,11 +271,6 @@
                     &#8593;
                 </span>
 
-                <span class="down">
-                    <span id="7_3">0</span>
-                    <br>
-                    &#8595;
-                </span>
             </div>
             <div class="state" id="height">
                 <h1><span id="V_8"></span></h1>
@@ -334,13 +299,13 @@
 
         var Q = [
             [0, 0, 0, 0],
+            [-0.1, 0, -0.1, 0],
+            [0, 0, -0.1, 0],
             [0, 0, 0, 0],
+            [-0.1, 0, 0, 0],
             [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
+            [0, -0.1, 0, 0],
+            [-0.1, 0, 0, -0.1],
             [0, 0, 0, 0],
             [0, 0, 0, 0]
         ];
@@ -367,7 +332,7 @@
             else if (action == 2){ // up
                 agent_pos.y = Math.min(2, Math.max(0, agent_pos.y - 1));
             }
-            else if (action == 3){ // dpwn
+            else if (action == 3){ // down
                 agent_pos.y = Math.min(2, Math.max(0, agent_pos.y + 1));
             }
 
@@ -417,7 +382,24 @@
 
         function take_action(st, eps){
             if (Math.random() < eps){
-                action = getRandomInt(4);
+				let notOk = true;
+				while( notOk){
+					notOk = false;
+					action = getRandomInt(4);
+					if (action == 0 && (st == 1 || st == 4 || st == 7)){
+						notOk = true;
+					}
+					else if (action == 1 && (st == 6)){
+						notOk = true;
+					}
+					else if (action == 2 && (st == 1 || st == 2)){
+						notOk = true;
+					}
+					else if (action == 3 && (st == 7)){
+						notOk = true;
+					}
+					
+				}
             }
             else{
                 action = argMax(Q[st])
@@ -487,6 +469,7 @@
 		bTen.addEventListener("click", () => {
 			let finish = false;
 			for (let i = 0; i < 9; i++) {
+				finish = false;
 				while (!finish){
 					finish = clickAction(-1);
 				}
@@ -496,26 +479,38 @@
 		
 		var bUp = document.getElementById("bUp");
 		bUp.addEventListener("click", () => {
-            clickAction(2);
+            if (!(state == 1 || state == 2)){
+				clickAction(2);
+			}
 
         });
 		
 		var bL = document.getElementById("bL");
 		bL.addEventListener("click", () => {
-			clickAction(0);
+			if (!(state == 1 || state == 4 || state == 7)){
+				clickAction(0);
+			}
+			
 
         });
 		
 		var bD = document.getElementById("bD");
 		bD.addEventListener("click", () => {
-			clickAction(3);
+			if (!(state == 7)){
+				clickAction(3);
+			}
+
 
         });
 		
 		var bR = document.getElementById("bR");
 		bR.addEventListener("click", () => {
-			clickAction(1);
+			if (!(state == 6)){
+				clickAction(1);
+			}
         });
+		
+		
 		
 		
         </script>
